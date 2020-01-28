@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    role: webhook
-    samples.knative.dev/release: devel
-  name: webhook
-  namespace: knative-samples
-spec:
-  ports:
-    - port: 443
-      targetPort: 8443
-  selector:
-    role: webhook
+#apiVersion: v1
+#kind: Service
+#metadata:
+#  labels:
+#    role: webhook
+#    samples.knative.dev/release: devel
+#  name: webhook
+#  namespace: ksvc-broker
+#spec:
+#  ports:
+#    - port: 443
+#      targetPort: 8443
+#  selector:
+#    role: webhook

@@ -120,6 +120,14 @@
   version = "v4.2.0"
 
 [[projects]]
+  digest = "1:81466b4218bf6adddac2572a30ac733a9255919bc2f470b4827a317bd4ee1756"
+  name = "github.com/ghodss/yaml"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "0ca9ea5df5451ffdf184b4428c902747c2c11cd7"
+  version = "v1.0.0"
+
+[[projects]]
   digest = "1:fcd8ddc48ce648d5fbb36029fe3dd98f29c03377eea5c4a3c436701b0e3f2774"
   name = "github.com/gobuffalo/envy"
   packages = ["."]
@@ -167,10 +175,11 @@
   version = "v1.3.2"
 
 [[projects]]
-  digest = "1:bf40199583e5143d1472fc34d10d6f4b69d97572142acf343b3e43136da40823"
+  digest = "1:010d46ea3c1e730897e53058d1013a963f3f987675dda87df64f891b945281db"
   name = "github.com/google/go-cmp"
   packages = [
     "cmp",
+    "cmp/cmpopts",
     "cmp/internal/diff",
     "cmp/internal/flags",
     "cmp/internal/function",
@@ -178,6 +187,13 @@
   ]
   pruneopts = "NUT"
   revision = "6f77996f0c42f7b84e5a2b252227263f93432e9b"
+
+[[projects]]
+  digest = "1:10aa62acd56f635de190110a836aa261b3774e697b2b6a7af27d8263cf856d47"
+  name = "github.com/google/go-containerregistry"
+  packages = ["pkg/name"]
+  pruneopts = "NUT"
+  revision = "b02d448a3705facf11018efff34f1d2830be5724"
 
 [[projects]]
   branch = "master"
@@ -284,6 +300,14 @@
   revision = "f2b4162afba35581b6d4a50d3b8f34e33c144682"
 
 [[projects]]
+  digest = "1:08c58ac78a8c1f61e9a96350066d30fe194b8779799bd932a79932a5166a173f"
+  name = "github.com/kelseyhightower/envconfig"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "0b417c4ec4a8a82eecc22a1459a504aa55163d61"
+  version = "v1.4.0"
+
+[[projects]]
   digest = "1:56dbf15e091bf7926cb33a57cb6bdfc658fc6d3498d2f76f10a97ce7856f1fde"
   name = "github.com/markbates/inflect"
   packages = ["."]
@@ -365,6 +389,14 @@
   ]
   pruneopts = "NUT"
   revision = "a7aeb8df3389edaf53efcc319ad0063cb27c3960"
+
+[[projects]]
+  digest = "1:848d23083e5cd9077383e35850ba4c5bcc47bb42b87d5a53a83b758c977b46c8"
+  name = "github.com/robfig/cron"
+  packages = ["."]
+  pruneopts = "NUT"
+  revision = "ccba498c397bb90a9c84945bbb0f7af2d72b6309"
+  version = "v3.0.1"
 
 [[projects]]
   digest = "1:e09ada96a5a41deda4748b1659cc8953961799e798aea557257b56baee4ecaf3"
@@ -777,11 +809,10 @@
   version = "kubernetes-1.16.4"
 
 [[projects]]
-  digest = "1:d5b26b8dfb8f6a0c8486b8d5957ae31b7605c3168e2e13b8ae5531c62eb3e98d"
+  digest = "1:06db9a8977489739f66f482d2ca19d8b480c139100b3162599aec60ae2e68fef"
   name = "k8s.io/client-go"
   packages = [
     "discovery",
-    "discovery/fake",
     "dynamic",
     "informers",
     "informers/admissionregistration",
@@ -918,7 +949,6 @@
     "plugin/pkg/client/auth/exec",
     "rest",
     "rest/watch",
-    "testing",
     "tools/auth",
     "tools/cache",
     "tools/clientcmd",
@@ -1018,18 +1048,79 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:291535c24f27abdc33725589577b28669d6aeb36b96a3b01fdf9d499d154d2b6"
+  name = "knative.dev/eventing"
+  packages = [
+    "pkg/apis/duck",
+    "pkg/apis/duck/v1alpha1",
+    "pkg/apis/duck/v1beta1",
+    "pkg/apis/eventing",
+    "pkg/apis/eventing/v1alpha1",
+    "pkg/apis/eventing/v1beta1",
+    "pkg/apis/flows",
+    "pkg/apis/flows/v1alpha1",
+    "pkg/apis/flows/v1beta1",
+    "pkg/apis/legacysources",
+    "pkg/apis/legacysources/v1alpha1",
+    "pkg/apis/messaging",
+    "pkg/apis/messaging/v1alpha1",
+    "pkg/apis/messaging/v1beta1",
+    "pkg/apis/sources",
+    "pkg/apis/sources/v1alpha1",
+    "pkg/client/clientset/versioned",
+    "pkg/client/clientset/versioned/scheme",
+    "pkg/client/clientset/versioned/typed/eventing/v1alpha1",
+    "pkg/client/clientset/versioned/typed/eventing/v1beta1",
+    "pkg/client/clientset/versioned/typed/flows/v1alpha1",
+    "pkg/client/clientset/versioned/typed/flows/v1beta1",
+    "pkg/client/clientset/versioned/typed/messaging/v1alpha1",
+    "pkg/client/clientset/versioned/typed/messaging/v1beta1",
+    "pkg/client/clientset/versioned/typed/sources/v1alpha1",
+    "pkg/client/informers/externalversions",
+    "pkg/client/informers/externalversions/eventing",
+    "pkg/client/informers/externalversions/eventing/v1alpha1",
+    "pkg/client/informers/externalversions/eventing/v1beta1",
+    "pkg/client/informers/externalversions/flows",
+    "pkg/client/informers/externalversions/flows/v1alpha1",
+    "pkg/client/informers/externalversions/flows/v1beta1",
+    "pkg/client/informers/externalversions/internalinterfaces",
+    "pkg/client/informers/externalversions/messaging",
+    "pkg/client/informers/externalversions/messaging/v1alpha1",
+    "pkg/client/informers/externalversions/messaging/v1beta1",
+    "pkg/client/informers/externalversions/sources",
+    "pkg/client/informers/externalversions/sources/v1alpha1",
+    "pkg/client/injection/client",
+    "pkg/client/injection/informers/eventing/v1alpha1/broker",
+    "pkg/client/injection/informers/eventing/v1alpha1/trigger",
+    "pkg/client/injection/informers/factory",
+    "pkg/client/listers/eventing/v1alpha1",
+    "pkg/client/listers/eventing/v1beta1",
+    "pkg/client/listers/flows/v1alpha1",
+    "pkg/client/listers/flows/v1beta1",
+    "pkg/client/listers/messaging/v1alpha1",
+    "pkg/client/listers/messaging/v1beta1",
+    "pkg/client/listers/sources/v1alpha1",
+    "pkg/logging",
+  ]
+  pruneopts = "NUT"
+  revision = "3f690097dbf109661620baa46e939c4754212880"
+
+[[projects]]
+  branch = "master"
   digest = "1:92b7055a014502a4b66d16ddc846de570f2d42ebdf9e6dfdc1b6eb2efc573294"
   name = "knative.dev/pkg"
   packages = [
     "apis",
     "apis/duck",
     "apis/duck/v1",
+    "apis/duck/v1alpha1",
+    "apis/duck/v1beta1",
     "changeset",
+    "client/injection/ducks/duck/v1/addressable",
     "client/injection/kube/client",
     "client/injection/kube/informers/admissionregistration/v1beta1/mutatingwebhookconfiguration",
     "client/injection/kube/informers/admissionregistration/v1beta1/validatingwebhookconfiguration",
     "client/injection/kube/informers/core/v1/secret",
-    "client/injection/kube/informers/core/v1/service",
     "client/injection/kube/informers/factory",
     "codegen/cmd/injection-gen",
     "codegen/cmd/injection-gen/args",
@@ -1037,6 +1128,7 @@
     "configmap",
     "controller",
     "injection",
+    "injection/clients/dynamicclient",
     "injection/sharedmain",
     "kmeta",
     "kmp",
@@ -1048,6 +1140,7 @@
     "profiling",
     "ptr",
     "reconciler",
+    "resolver",
     "signals",
     "system",
     "tracker",
@@ -1062,6 +1155,63 @@
   ]
   pruneopts = "T"
   revision = "5ff923b836abcbeb6ac3ff2784db0d5b5786ade2"
+
+[[projects]]
+  branch = "master"
+  digest = "1:a17125df1dc52a87e6793d78b2013453d2fe14c57531d4c413b02f31e3d8fa7f"
+  name = "knative.dev/sample-controller"
+  packages = [
+    "pkg/apis/samples",
+    "pkg/apis/samples/v1alpha1",
+  ]
+  pruneopts = "NUT"
+  revision = "a0782c37dac0f8281193a87be8fbc1d309167aee"
+
+[[projects]]
+  digest = "1:20716b84f070dc8d1b954aaebba5e889886fabf507b50b4540ad02daf3161f49"
+  name = "knative.dev/serving"
+  packages = [
+    "pkg/apis/autoscaling",
+    "pkg/apis/autoscaling/v1alpha1",
+    "pkg/apis/config",
+    "pkg/apis/networking",
+    "pkg/apis/networking/v1alpha1",
+    "pkg/apis/serving",
+    "pkg/apis/serving/v1",
+    "pkg/apis/serving/v1alpha1",
+    "pkg/apis/serving/v1beta1",
+    "pkg/client/clientset/versioned",
+    "pkg/client/clientset/versioned/scheme",
+    "pkg/client/clientset/versioned/typed/autoscaling/v1alpha1",
+    "pkg/client/clientset/versioned/typed/networking/v1alpha1",
+    "pkg/client/clientset/versioned/typed/serving/v1",
+    "pkg/client/clientset/versioned/typed/serving/v1alpha1",
+    "pkg/client/clientset/versioned/typed/serving/v1beta1",
+    "pkg/client/informers/externalversions",
+    "pkg/client/informers/externalversions/autoscaling",
+    "pkg/client/informers/externalversions/autoscaling/v1alpha1",
+    "pkg/client/informers/externalversions/internalinterfaces",
+    "pkg/client/informers/externalversions/networking",
+    "pkg/client/informers/externalversions/networking/v1alpha1",
+    "pkg/client/informers/externalversions/serving",
+    "pkg/client/informers/externalversions/serving/v1",
+    "pkg/client/informers/externalversions/serving/v1alpha1",
+    "pkg/client/informers/externalversions/serving/v1beta1",
+    "pkg/client/injection/client",
+    "pkg/client/injection/informers/factory",
+    "pkg/client/injection/informers/serving/v1/service",
+    "pkg/client/listers/autoscaling/v1alpha1",
+    "pkg/client/listers/networking/v1alpha1",
+    "pkg/client/listers/serving/v1",
+    "pkg/client/listers/serving/v1alpha1",
+    "pkg/client/listers/serving/v1beta1",
+    "pkg/gc",
+    "pkg/network",
+    "pkg/reconciler/route/config",
+  ]
+  pruneopts = "NUT"
+  revision = "bf0a84876192c5345980b67796ffa54ca13723b2"
+  version = "v0.12.0"
 
 [[projects]]
   branch = "master"
@@ -1086,45 +1236,38 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
+    "github.com/kelseyhightower/envconfig",
     "go.uber.org/zap",
     "k8s.io/api/core/v1",
     "k8s.io/apimachinery/pkg/api/equality",
     "k8s.io/apimachinery/pkg/api/errors",
     "k8s.io/apimachinery/pkg/apis/meta/v1",
     "k8s.io/apimachinery/pkg/labels",
-    "k8s.io/apimachinery/pkg/runtime",
     "k8s.io/apimachinery/pkg/runtime/schema",
-    "k8s.io/apimachinery/pkg/runtime/serializer",
     "k8s.io/apimachinery/pkg/types",
-    "k8s.io/apimachinery/pkg/util/runtime",
-    "k8s.io/apimachinery/pkg/watch",
-    "k8s.io/client-go/discovery",
-    "k8s.io/client-go/discovery/fake",
     "k8s.io/client-go/kubernetes/scheme",
-    "k8s.io/client-go/listers/core/v1",
-    "k8s.io/client-go/rest",
-    "k8s.io/client-go/testing",
     "k8s.io/client-go/tools/cache",
     "k8s.io/client-go/tools/record",
-    "k8s.io/client-go/util/flowcontrol",
     "k8s.io/code-generator/cmd/client-gen",
     "k8s.io/code-generator/cmd/deepcopy-gen",
     "k8s.io/code-generator/cmd/defaulter-gen",
     "k8s.io/code-generator/cmd/informer-gen",
     "k8s.io/code-generator/cmd/lister-gen",
-    "knative.dev/pkg/apis",
-    "knative.dev/pkg/apis/duck/v1",
-    "knative.dev/pkg/client/injection/kube/informers/core/v1/service",
+    "knative.dev/eventing/pkg/apis/eventing/v1alpha1",
+    "knative.dev/eventing/pkg/client/clientset/versioned",
+    "knative.dev/eventing/pkg/client/injection/client",
+    "knative.dev/eventing/pkg/client/injection/informers/eventing/v1alpha1/broker",
+    "knative.dev/eventing/pkg/client/injection/informers/eventing/v1alpha1/trigger",
+    "knative.dev/eventing/pkg/client/listers/eventing/v1alpha1",
     "knative.dev/pkg/codegen/cmd/injection-gen",
     "knative.dev/pkg/configmap",
     "knative.dev/pkg/controller",
-    "knative.dev/pkg/injection",
     "knative.dev/pkg/injection/sharedmain",
     "knative.dev/pkg/kmeta",
     "knative.dev/pkg/logging",
     "knative.dev/pkg/metrics",
-    "knative.dev/pkg/network",
     "knative.dev/pkg/reconciler",
+    "knative.dev/pkg/resolver",
     "knative.dev/pkg/signals",
     "knative.dev/pkg/system",
     "knative.dev/pkg/tracker",
@@ -1134,6 +1277,12 @@
     "knative.dev/pkg/webhook/resourcesemantics",
     "knative.dev/pkg/webhook/resourcesemantics/defaulting",
     "knative.dev/pkg/webhook/resourcesemantics/validation",
+    "knative.dev/sample-controller/pkg/apis/samples/v1alpha1",
+    "knative.dev/serving/pkg/apis/serving/v1",
+    "knative.dev/serving/pkg/client/clientset/versioned",
+    "knative.dev/serving/pkg/client/injection/client",
+    "knative.dev/serving/pkg/client/injection/informers/serving/v1/service",
+    "knative.dev/serving/pkg/client/listers/serving/v1",
     "knative.dev/test-infra/scripts",
     "knative.dev/test-infra/tools/dep-collector",
   ]

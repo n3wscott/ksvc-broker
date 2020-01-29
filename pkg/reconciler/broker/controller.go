@@ -20,6 +20,7 @@ import (
 	"context"
 	"github.com/kelseyhightower/envconfig"
 	"k8s.io/apimachinery/pkg/types"
+	"k8s.io/client-go/tools/cache"
 	"knative.dev/pkg/resolver"
 
 	"knative.dev/eventing/pkg/client/injection/client"
@@ -41,8 +42,8 @@ import (
 const (
 	controllerAgentName = "ksvc-broker-controller"
 
-	brokerClassLabel = "eventing.knative.dev/broker.class"
-	thisBrokerClass  = "ksvc-broker"
+	brokerClassAnnotation = "eventing.knative.dev/broker.class"
+	thisBrokerClass       = "ksvc-broker"
 )
 
 type envConfig struct {
@@ -73,7 +74,7 @@ func NewController(
 
 	env := &envConfig{}
 	if err := envconfig.Process("", env); err != nil {
-		logger.Panicf("unable to process CronJobSource's required environment variables: %v", err)
+		logger.Panicf("unable to process Broker's required environment variables: %v", err)
 	}
 
 	c.BrokerImage = env.Image
@@ -91,5 +92,11 @@ func NewController(
 			}
 		},
 	))
+
+	ksvcInformer.Informer().AddEventHandler(cache.FilteringResourceEventHandler{
+		FilterFunc: controller.Filter(v1alpha1.SchemeGroupVersion.WithKind("Broker")),
+		Handler:    controller.HandleAll(impl.EnqueueControllerOf),
+	})
+
 	return impl
 }

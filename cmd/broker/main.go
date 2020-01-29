@@ -1,16 +1,20 @@
 package main
 
 import (
-	"fmt"
-	"log"
-	"net/http"
+	"github.com/n3wscott/ksvc-broker/pkg/broker"
+	"knative.dev/pkg/logging"
+	"knative.dev/pkg/signals"
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello, you want: %s\n", r.URL.Path)
-		log.Printf("Request: %s", r.URL.Path)
-	})
+	ctx := signals.NewContext()
+	logger := logging.FromContext(ctx)
 
-	http.ListenAndServe(":8080", nil)
+	b, err := broker.NewBroker(logger)
+	if err != nil {
+		logger.Error(err)
+	}
+	if err := b.Start(ctx); err != nil {
+		logger.Error(err)
+	}
 }

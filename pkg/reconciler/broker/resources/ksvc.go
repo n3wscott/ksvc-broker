@@ -1,10 +1,12 @@
 package resources
 
 import (
+	"encoding/json"
 	"fmt"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"knative.dev/eventing/pkg/apis/eventing/v1alpha1"
+	"knative.dev/pkg/apis"
 	"knative.dev/pkg/kmeta"
 	servingv1 "knative.dev/serving/pkg/apis/serving/v1"
 	"strings"
@@ -21,18 +23,36 @@ func GetLabels() map[string]string {
 }
 
 type Args struct {
-	Broker *v1alpha1.Broker
-	Image  string
-	Labels map[string]string
+	Broker   *v1alpha1.Broker
+	Image    string
+	Labels   map[string]string
+	Triggers []Trigger
+}
+
+func (a *Args) AddTrigger(t Trigger) {
+	if a.Triggers == nil {
+		a.Triggers = make([]Trigger, 0)
+	}
+	a.Triggers = append(a.Triggers, t)
+}
+
+type Trigger struct {
+	AttributesFilter v1alpha1.TriggerFilterAttributes `json:"af,omitempty"`
+	Subscriber       *apis.URL                        `json:"s,omitempty"`
 }
 
 func makePodSpec(args *Args) corev1.PodSpec {
+	triggerJson, _ := json.Marshal(args.Triggers)
+	if triggerJson == nil || len(triggerJson) == 0 {
+		triggerJson = []byte("{}")
+	}
+
 	podSpec := corev1.PodSpec{
 		Containers: []corev1.Container{{
 			Image: args.Image,
 			Env: []corev1.EnvVar{{
-				Name:  "STUFF",
-				Value: "TODO",
+				Name:  "TRIGGERS",
+				Value: string(triggerJson),
 			}}},
 		},
 	}

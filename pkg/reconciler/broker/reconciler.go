@@ -103,9 +103,9 @@ func (r *Reconciler) Reconcile(ctx context.Context, key string) error {
 	return r.reconcileTrigger(ctx, key, namespace, name)
 }
 
-func isThisClass(labels map[string]string) bool {
-	for k, v := range labels {
-		if k == brokerClassLabel {
+func isAnnotatedThisClass(annotations map[string]string) bool {
+	for k, v := range annotations {
+		if k == brokerClassAnnotation {
 			if v == thisBrokerClass {
 				return true
 			}
@@ -129,21 +129,10 @@ func (r *Reconciler) reconcileBroker(ctx context.Context, key, namespace, name s
 	// Don't modify the informers copy.
 	resource := original.DeepCopy()
 
-	if match := isThisClass(resource.GetLabels()); !match {
+	if match := isAnnotatedThisClass(resource.GetAnnotations()); !match {
 		return nil
 	}
-
-	shouldReconcile := false
-	for k, v := range resource.GetLabels() {
-		if k == brokerClassLabel {
-			if v == thisBrokerClass {
-				shouldReconcile = true
-			}
-		}
-	}
-	if !shouldReconcile {
-		return nil
-	}
+	logger.Info("This broker matches the expected class.")
 
 	// Reconcile this copy of the resource and then write back any status
 	// updates regardless of whether the reconciliation errored out.
@@ -189,6 +178,12 @@ func (r *Reconciler) reconcileTrigger(ctx context.Context, key, namespace, name 
 	// Don't modify the informers copy.
 	broker = ogBroker.DeepCopy()
 
+	// TODO: if the broker no longer exists but was the correct class... we have an issue here.
+	if match := isAnnotatedThisClass(broker.GetAnnotations()); !match {
+		return nil
+	}
+	logger.Info("This broker matches the expected class.")
+
 	// Get the resource with this namespace/name.
 	originals, err := r.TriggerLister.Triggers(namespace).List(labels.Everything())
 	if apierrs.IsNotFound(err) {
@@ -223,7 +218,7 @@ func (r *Reconciler) reconcileTrigger(ctx context.Context, key, namespace, name 
 			return err
 		}
 		if reconcileEvent != nil {
-			logger.Error("ReconcileKind returned an event: %v", reconcileEvent)
+			logger.Errorw("ReconcileKind returned an event", reconcileEvent)
 			var event *reconciler.ReconcilerEvent
 			if reconciler.EventAs(reconcileEvent, &event) {
 				r.Recorder.Eventf(resource, event.EventType, event.Reason, event.Format, event.Args...)
